@@ -508,6 +508,60 @@ Method: Built-In Function
 Difficulty: Easy
 踩坑记录：`list.sort()`没有返回值
 
+## 243. Shortest Word Distance
+**Input:** wordsDict = ["practice", "makes", "perfect", "coding", "makes"], word1 = "coding", word2 = "practice"
+**Output:** 3
+
+```python
+class Solution:
+    def shortestDistance(self, wordsDict: List[str], word1: str, word2: str) -> int:
+        ls1 = []
+        ls2 = []
+        for i in range(len(wordsDict)):
+            if(wordsDict[i] == word1):
+                ls1.append(i)
+        for j in range(len(wordsDict)):
+            if(wordsDict[j] == word2):
+                ls2.append(j)
+        ls = []
+        mindis = float('inf')
+        for i in ls1:
+            for j in ls2:
+                diff = abs(i - j)
+                mindis = min(mindis, diff)
+        return int(mindis)
+```
+
+Type: String
+Method: Brutal Force
+Difficulty: Easy
+踩坑记录：无
+
+## 293. Flip Game
+**Input:** currentState = "++++"
+**Output:** ["--++","+--+","++--"]
+
+```python
+class Solution:
+    def generatePossibleNextMoves(self, currentState: str) -> List[str]:
+        ls = []
+        new = []
+        if(len(currentState) <= 1): return []
+        for i in range(len(currentState) - 1):
+            new = list(currentState)
+            if((currentState[i] == "+") & (currentState[i + 1] == "+")):
+               new[i] = "-"
+               new[i + 1] = "-"
+               new = ''.join(new)
+               ls.append(new)
+        return ls
+```
+
+Type: String
+Method: Brutal Force
+Difficulty: Easy
+踩坑记录：字符串没法改特定位数，需要转换成列表再转回字符串
+
 ## 344. Reverse String
 **Input:** s = ["h","e","l","l","o"]
 **Output:** ["o","l","l","e","h"]
